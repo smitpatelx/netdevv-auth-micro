@@ -48,6 +48,11 @@ module.exports = {
       'outline': '0 0 0 3px rgba(66,153,225,0.5)',
       'focus': '0 0 0 3px rgba(66,153,225,0.5)',
       'none': 'none'
+    },
+    extend: {
+      width: {
+        '96': '29rem',
+      }
     }
   },
   variants: {},

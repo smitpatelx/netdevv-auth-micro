@@ -2,9 +2,14 @@ var express = require('express');
 var router = express.Router();
 var authHeader = require("../helpers/global/auth");
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Netdevv API', env_test: env.APP_DESCRIPTION });
+  res.render('index', { title: 'Sign in - Netdevv Accounts'});
+});
+router.get('/login', function(req, res, next) {
+  res.render('index', { title: 'Sign in - Netdevv Accounts'});
+});
+router.get('/register', function(req, res, next) {
+  res.render('index', { title: 'Create your Netdevv Accounts'});
 });
 
 router.post('/test', authHeader, function(req, res, next) {
