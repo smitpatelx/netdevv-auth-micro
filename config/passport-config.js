@@ -3,6 +3,7 @@ const refresh = require('passport-oauth2-refresh');
 const GoogleStrategy = require('passport-google-oauth20');
 const GithubStrategy = require('passport-github2');
 const LocalStrategy = require('passport-local');
+const {SanitizeUser} = require('../helpers/global/auth');
 
 const User = require('../models/user.js');
 const bcrypt = require('bcrypt');

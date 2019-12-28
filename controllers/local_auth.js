@@ -3,13 +3,15 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const User = require('../models/user.js');
 const AuthToken = require('../models/authtokens.js');
+const {SanitizeUser} = require('../helpers/global/auth');
 
 let local_auth = {};
 
 local_auth.login = (req, res, next)=>{
     var user = req.user;
-    const accessToken = jwt.sign({user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });
-    generate_token(user, accessToken, res);
+    let new_user = SanitizeUser(user);
+    const accessToken = jwt.sign({new_user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });
+    generate_token(new_user, accessToken, res);
 }
 
 local_auth.register = (req, res, next)=>{
@@ -56,9 +58,9 @@ local_auth.register = (req, res, next)=>{
                                     err
                                 });
                             } else {
-                                var user = data;
-                                const accessToken = jwt.sign({user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });
-                                generate_token(user, accessToken, res);
+                                let new_user = SanitizeUser(data);
+                                const accessToken = jwt.sign({new_user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });
+                                generate_token(new_user, accessToken, res);
                             }
                         });
                     }
@@ -107,7 +109,7 @@ var generate_token = (user, accessToken, res)=>{
         } else {
             const refreshToken = jwt.sign({user}, env.JWT_REFRESH_SECRET);
             var new_token = new AuthToken({
-                user_id: user.id,
+                user_id: user._id,
                 refresh_token: refreshToken
             });
 

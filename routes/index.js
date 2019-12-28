@@ -1,19 +1,31 @@
 var express = require('express');
 var router = express.Router();
-var authHeader = require("../helpers/global/auth");
+var {AuthCheck} = require("../helpers/global/auth");
+const jwt = require('jsonwebtoken');
 
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Sign in - Netdevv Accounts'});
-});
-router.get('/login', function(req, res, next) {
-  res.render('index', { title: 'Sign in - Netdevv Accounts'});
-});
-router.get('/register', function(req, res, next) {
-  res.render('index', { title: 'Create your Netdevv Accounts'});
+router.get('/*', (req, res, next)=>{
+  let csrf_token = req.csrfToken();
+  res.render('index', 
+  { 
+    csrf: csrf_token
+  });
 });
 
-router.post('/test', authHeader, function(req, res, next) {
-  res.json("Success");
+router.post('/user', AuthCheck, (req, res, next)=>{
+  const authHeader = req.headers['authorization'];
+  if(typeof authHeader !== 'undefined'){
+    const token = authHeader.split(" ")[1];
+    if(token == null) return res.status(401).json("Access Denied - Token not present");
+    jwt.verify(token, env.JWT_SECRET, (err, data)=>{
+      if(err){
+          return res.status(403).json(err);
+      } else {
+        res.status(200).json(data.new_user);
+      }
+    });
+  } else {
+    return res.status(401).json("Access Denied - Token not present");
+  }
 });
 
 module.exports = router;

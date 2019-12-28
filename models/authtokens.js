@@ -4,7 +4,8 @@ const findOrCreate = require('mongoose-find-or-create');
 const authTokenSchema = new mongoose.Schema({
   user_id:{
     type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
   refresh_token:{
     type: String

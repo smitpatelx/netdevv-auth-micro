@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const clients = require('../config/auth-clients.js');
 const jwt = require('jsonwebtoken');
-const CheckAuth = require('../helpers/global/auth');
+const {AuthCheck, SanitizeUser} = require('../helpers/global/auth');
 const AuthToken = require('../models/authtokens.js');
 
 // Controllers
@@ -55,8 +54,9 @@ router.get('/google', passport.authenticate('google', {
 }));
 router.get('/google/callback', passport.authenticate('google'), (req, res) => {
   var user = req.user;
-  const accessToken = jwt.sign({user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });
-  generate_token(user, accessToken, res);
+  let new_user = SanitizeUser(user);
+  const accessToken = jwt.sign({new_user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });
+  generate_token(new_user, accessToken, res);
 });
 
 //Auth with github
@@ -65,8 +65,9 @@ router.get('/github', passport.authenticate('github', {
 }));
 router.get('/github/callback', passport.authenticate('github'), (req, res) => {
   var user = req.user;
-  const accessToken = jwt.sign({user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });
-  generate_token(user, accessToken, res);
+  let new_user = SanitizeUser(user);
+  const accessToken = jwt.sign({new_user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });
+  generate_token(new_user, accessToken, res);
 });
 
 var generate_token = (user, accessToken, res)=>{

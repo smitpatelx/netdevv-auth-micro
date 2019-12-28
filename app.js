@@ -1,5 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
+const hbs = require( 'express-handlebars');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -8,7 +9,7 @@ const passport = require('passport');
 const cookieSession = require('cookie-session');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-
+const csrf = require('csurf');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const authRoutes = require('./routes/auth');
@@ -16,7 +17,7 @@ const authRoutes = require('./routes/auth');
 const app = express();
 
 //Cors Implementation
-const whitelist = ['http://127.0.0.1:8890', 'http://127.0.0.1:8899', 'https://snapi.netdevv.com']
+const whitelist = ['http://127.0.0.1:8890', 'https://snapi.netdevv.com']
 const co = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
@@ -27,9 +28,11 @@ const co = {
   }
 }
 app.use(cors(co));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+app.engine( '.hbs', hbs({extname: '.hbs'}));
+app.set('view engine', '.hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -53,6 +56,14 @@ app.use(cookieSession({
   keys: [env.PASSPORT_SECRET]
 }));
 
+//CSRF Implementation
+const csrfMiddleware = csrf({
+  cookie: true,
+  sameSite: 'strict',
+  httpOnly: true
+});
+app.use(csrfMiddleware);
+
 //Database
 require('./database/database');
 
@@ -62,7 +73,6 @@ require('./config/passport-config');
 //Auth routes setup
 app.use('/auth', authRoutes);
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -14,6 +14,12 @@ const userSchema = new mongoose.Schema({
     max: 60,
     lowercase: true
   },
+  access:{
+    type: String,
+    min:1,
+    max:2,
+    default: 'c'
+  },
   salutation: {
     type: String,
     min: 2,

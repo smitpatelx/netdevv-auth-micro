@@ -52,9 +52,12 @@ module.exports = {
     extend: {
       width: {
         '96': '29rem',
+        '97': '44rem',
       }
     }
   },
-  variants: {},
+  variants: {
+    borderWidth: ['responsive', 'focus'],
+  },
   plugins: []
 };
