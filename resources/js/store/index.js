@@ -29,6 +29,11 @@ const store = new Vuex.Store({
             return state.refresh_token;
         },
     },
+    actions:{
+        logout(context){
+            context.commit('logout');
+        }
+    },
     plugins: [
         createPersistedState({
             storage: {
@@ -37,7 +42,7 @@ const store = new Vuex.Store({
             removeItem: key => ls.remove(key)
             }
         })
-    ],
+    ]
 });
 
 export default store;

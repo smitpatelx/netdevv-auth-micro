@@ -23,7 +23,7 @@ serialize = function (obj) {
  * Params: {refreshToken} + Authorization
  * Accepts: JSON
 ********************/
-router.post('/logout', [ local_auth.logout]);
+router.post('/logout', [AuthCheck, local_auth.logout]);
 
 /********************
  * Refresh Token

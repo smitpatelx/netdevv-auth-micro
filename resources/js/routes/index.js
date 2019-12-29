@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Header from '../layouts/Header';
+import SideBar from '../layouts/SideBar';
 
 Vue.use(VueRouter)
 
@@ -21,10 +23,65 @@ const router = new VueRouter({
     mode: 'history',
     routes: [
       { path: '/', component: imports.Login },
-      { path: '/login', component: imports.Login },
-      { path: '/register', component: imports.Register },
-      { path: '/account', component: imports.Account }
+      { 
+        path: '/login', 
+        component: imports.Login, 
+        meta: { 
+          requiresGuest: true,
+          title: 'Sign In - Netdevv Account'
+        } 
+      },
+      { 
+        path: '/register', 
+        component: imports.Register, 
+        meta: { 
+          requiresGuest: true,
+          title: 'Create your Netdevv Account'
+        } 
+      },
+      { 
+        path: '/account',
+        components: {
+          header: Header,
+          sidebar: SideBar,
+          default: imports.Account
+        }, 
+        meta: { 
+          requiresAuth: true,
+          title: 'Manage - Netdevv Account'
+        } 
+      },
+      { 
+        path: '/security', 
+        components: {
+          header: Header,
+          sidebar: SideBar,
+          default: imports.Security
+        }, 
+        meta: { 
+          requiresAuth: true,
+          title: 'Security - Netdevv Account'
+        }
+      },
+      { 
+        path: '/logout', 
+        component: imports.Logout, 
+        meta: { 
+          requiresAuth: true,
+          title: 'Sign Out - Netdevv Account'
+        } 
+      },
     ]
 });
+
+router.beforeEach((to, from, next) => {
+  var pageTitle = to.matched.slice().reverse().find(r => r.meta && r.meta.title);
+  if (pageTitle) {
+    document.title = pageTitle.meta.title;
+    next()
+  } else {
+    next() // make sure to always call next()!
+  }
+})
 
 export default router;

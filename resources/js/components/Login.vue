@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-full">
     <form class="flex flex-wrap flex-col justify-center items-center py-10 px-4 sm:px-2" method="post" @submit.prevent>
       <div
         class="border border-solid border-transparent sm:border-gray-400 flex flex-col flex-wrap bg-white w-full sm:w-96 text-center bg-white my-2 py-8 rounded-lg"
@@ -75,9 +75,8 @@
               class="focus:outline-none focus:shadow-outline bg-gray-200 hover:bg-gray-300 rounded text-primary-400 py-2 px-4 font-semibold text-sm"
             >Create Account</router-link>
             <button
-              class="focus:outline-none focus:shadow-outline hover:bg-primary-400 rounded text-white py-2 px-4 font-semibold text-sm"
-              :class="$v.$invalid ? 'bg-primary-400 cursor-not-allowed':'bg-primary-500 cursor-pointer'"
-              :disabled="$v.$invalid"
+              class="focus:outline-none focus:shadow-outline hover:bg-primary-400 rounded text-white py-2 px-4 font-semibold text-sm cursor-pointer"
+              :class="$v.$invalid ? 'bg-primary-400':'bg-primary-500'"
               @click="login_form"
             >Login</button>
           </div>

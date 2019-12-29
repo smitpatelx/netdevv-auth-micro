@@ -1,9 +1,13 @@
 <template>
-    <div id="app">
+    <div id="app" class="bg-gray-200">
         <notifications group="main" classes="vue-notification2"/>
-        <slide-x-left-transition origin="center" mode="out-in" :duration="300">
-            <router-view></router-view>
-        </slide-x-left-transition>
+        <router-view name="header"></router-view>
+        <div class="w-full flex flex-wrap">
+            <router-view name="sidebar"></router-view>
+            <slide-x-left-transition origin="center" mode="out-in" :duration="300">
+                <router-view></router-view>
+            </slide-x-left-transition>
+        </div>
     </div>
 </template>
 <script>
