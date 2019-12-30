@@ -805,6 +805,11 @@ img {
   padding-right: 1rem;
 }
 
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -813,6 +818,11 @@ img {
 .py-10 {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
+}
+
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
 }
 
 .px-16 {
@@ -980,6 +990,10 @@ img {
   font-size: 1rem;
 }
 
+.text-lg {
+  font-size: 1.125rem;
+}
+
 .text-xl {
   font-size: 1.25rem;
 }
@@ -1030,6 +1044,10 @@ img {
 
 .w-1\/5 {
   width: 20%;
+}
+
+.w-4\/5 {
+  width: 80%;
 }
 
 .w-1\/6 {

@@ -83,6 +83,7 @@ local_auth.logout = (req, res, next)=>{
                     user_id: data.user._id
                 },(err, data)=>{
                     if(data){
+                        req.logout();
                         res.status(200).json("Refresh Token Deleted Successfully");
                     } else{
                         res.status(403).json("Already Logged Out");

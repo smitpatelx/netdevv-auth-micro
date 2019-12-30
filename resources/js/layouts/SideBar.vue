@@ -1,5 +1,5 @@
 <template>
-    <div class="w-1/5 flex flex-wrap justify-center">
+    <div class="w-1/5 flex flex-wrap justify-start">
         <div class="w-48 rounded-lg p-2 z-10 mt-2">
             <div class="flex flex-wrap w-full flex-col text-sm font-medium antialiased">
                 <router-link to="account" class="focus:outline-none focus:underline text-gray-700 rounded-lg antialiased bg-transparent hover:underline shadow-none py-2 px-3 flex flex-wrap justify-start items-center">

@@ -1,6 +1,8 @@
 <template>
-    <div>
-        Welcome {{user.first_name}} {{user.last_name}}
+    <div class="w-4/5 bg-white rounded-lg mt-4 py-6 px-10 shadow-lg flex flex-wrap antialiased">
+        <p class="w-full text-lg text-gray-700">
+            Welcome {{user.first_name}} {{user.last_name}}
+        </p>
     </div>
 </template>
 <script>

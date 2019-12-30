@@ -1781,6 +1781,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2338,6 +2340,8 @@ var password_regex = vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["help
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -9030,15 +9034,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._v(
-      "\n    Welcome " +
-        _vm._s(_vm.user.first_name) +
-        " " +
-        _vm._s(_vm.user.last_name) +
-        "\n"
-    )
-  ])
+  return _c(
+    "div",
+    {
+      staticClass:
+        "w-4/5 bg-white rounded-lg mt-4 py-6 px-10 shadow-lg flex flex-wrap antialiased"
+    },
+    [
+      _c("p", { staticClass: "w-full text-lg text-gray-700" }, [
+        _vm._v(
+          "\n        Welcome " +
+            _vm._s(_vm.user.first_name) +
+            " " +
+            _vm._s(_vm.user.last_name) +
+            "\n    "
+        )
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -10144,7 +10157,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("p", [_vm._v("Security")])])
+    return _c(
+      "div",
+      {
+        staticClass:
+          "w-4/5 bg-white rounded-lg mt-4 py-6 px-10 shadow-lg flex flex-wrap antialiased"
+      },
+      [
+        _c("p", { staticClass: "w-full text-lg text-gray-700" }, [
+          _vm._v("\n        Security\n    ")
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -10180,7 +10204,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "w-full flex flex-wrap" },
+        { staticClass: "w-full flex flex-wrap px-16" },
         [
           _c("router-view", { attrs: { name: "sidebar" } }),
           _vm._v(" "),
@@ -10317,7 +10341,12 @@ var render = function() {
                         {
                           staticClass:
                             "focus:outline-none focus:underline transition-all ease-out transition-medium text-gray-700 hover:text-primary-400 antialiased bg-transparent hover:bg-white shadow-none hover:shadow py-1 pl-6 flex flex-wrap justify-start items-center",
-                          attrs: { to: "change-password" }
+                          attrs: { to: "security" },
+                          nativeOn: {
+                            blur: function($event) {
+                              return _vm.hide($event)
+                            }
+                          }
                         },
                         [
                           _vm._v(
@@ -10378,7 +10407,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "w-1/5 flex flex-wrap justify-center" }, [
+  return _c("div", { staticClass: "w-1/5 flex flex-wrap justify-start" }, [
     _c("div", { staticClass: "w-48 rounded-lg p-2 z-10 mt-2" }, [
       _c(
         "div",

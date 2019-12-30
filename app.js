@@ -1,4 +1,5 @@
-const createError = require('http-errors');
+// const createError = require('http-errors');
+// const history = require('connect-history-api-fallback');
 const express = require('express');
 const hbs = require( 'express-handlebars');
 const path = require('path');
@@ -11,7 +12,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const csrf = require('csurf');
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const authRoutes = require('./routes/auth');
 
 const app = express();
@@ -35,15 +35,13 @@ app.engine( '.hbs', hbs({extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 // for parsing application/json
 app.use(bodyParser.json());
 // for parsing application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
   extended: false
 }));
-app.use(cookieParser());
 app.use(sassMiddleware({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
@@ -51,8 +49,10 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.set('trust proxy', 1);
 app.use(cookieSession({
-  maxAge: 30*24*60*60*1000,
+  name: 'netdevv',
+  maxAge: 30*24*60*60*1000, //30 days
   keys: [env.PASSPORT_SECRET]
 }));
 
@@ -60,7 +60,7 @@ app.use(cookieSession({
 const csrfMiddleware = csrf({
   cookie: true,
   sameSite: 'strict',
-  httpOnly: true
+  httpOnly: false
 });
 app.use(csrfMiddleware);
 
@@ -70,31 +70,17 @@ require('./database/database');
 app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport-config');
+
+// catch errors and forward to error handler
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+
 //Auth routes setup
+// app.use(history());
 app.use('/auth', authRoutes);
 app.use('/', indexRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
-app.use((err, req, res, next) => {
-  res.locals.error = err;
-  const status = err.status || 500;
-  res.status(status);
-  res.render('error');
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
 
 module.exports = app;

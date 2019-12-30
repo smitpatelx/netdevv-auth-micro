@@ -9,12 +9,17 @@ const User = require('../models/user.js');
 const bcrypt = require('bcrypt');
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+    console.log(user);
+    done(null, user._id);
 });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id, (user) => {
-      done(null, user);
+passport.deserializeUser((_id, done) => {
+  User.findById( _id, (err, user) => {
+    if(err){
+        done(null, false, {error:err});
+    } else {
+        done(null, user);
+    }
   });
 });
 
@@ -38,7 +43,7 @@ var google = new GoogleStrategy({
         },
         (err, data)=>{
             if(err){
-                done(null, false);
+                done(null, false, {error:err});
             } else {
                 done(null, data);
             }
@@ -72,7 +77,7 @@ var github = new GithubStrategy({
         },
         (err, data)=>{
             if(err){
-                done(null, false);
+                done(null, false, {error:err});
             } else {
                 done(null, data);
             }
@@ -87,21 +92,21 @@ passport.use(
     new LocalStrategy({
         usernameField: 'email',
     }, (email, password, done)=>{
-        if(email==null) return done(null, false);
-        if(password==null) return done(null, false);
+        if(email==null) return done(null, false, {error:"Email required"});
+        if(password==null) return done(null, false, {error:"Password required"});
 
         User.findOne({
             primary_email: email
         },
         (err, data)=>{
             if(data==null){
-                return done(null, false);
+                return done(null, false, {error:"Email or Password incorrect"});
             } else {
                 bcrypt.compare(password, data.password, (err, result)=>{    
                     if (result == true) {
                         return done(null, data);
                     } else {
-                        return done(null, false);
+                        return done(null, false, {error:"Email or Password incorrect"});
                     }
                 });
             }

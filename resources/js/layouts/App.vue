@@ -2,7 +2,7 @@
     <div id="app" class="bg-gray-200">
         <notifications group="main" classes="vue-notification2"/>
         <router-view name="header"></router-view>
-        <div class="w-full flex flex-wrap">
+        <div class="w-full flex flex-wrap px-16">
             <router-view name="sidebar"></router-view>
             <slide-x-left-transition origin="center" mode="out-in" :duration="300">
                 <router-view></router-view>

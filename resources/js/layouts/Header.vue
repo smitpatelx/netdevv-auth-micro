@@ -16,7 +16,7 @@
                         <router-link to="account" class="focus:outline-none focus:underline transition-all ease-out transition-medium text-gray-700 hover:text-primary-400 antialiased bg-transparent hover:bg-white shadow-none hover:shadow py-1 pl-6 flex flex-wrap justify-start items-center">
                             Account
                         </router-link>
-                        <router-link to="change-password" class="focus:outline-none focus:underline transition-all ease-out transition-medium text-gray-700 hover:text-primary-400 antialiased bg-transparent hover:bg-white shadow-none hover:shadow py-1 pl-6 flex flex-wrap justify-start items-center">
+                        <router-link @blur.native="hide" to="security" class="focus:outline-none focus:underline transition-all ease-out transition-medium text-gray-700 hover:text-primary-400 antialiased bg-transparent hover:bg-white shadow-none hover:shadow py-1 pl-6 flex flex-wrap justify-start items-center">
                             Security
                         </router-link>
                     </div>
