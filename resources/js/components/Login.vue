@@ -12,7 +12,7 @@
           <p class="w-full text-center text-gray-800 font-normal text-base mb-3">Use your Social Media</p>
           <a
             class="flex flex-wrap justify-between items-center w-auto focus:outline-none focus:shadow-outline bg-primary-500 hover:bg-primary-400 text-white text-sm py-2 px-3 rounded mx-2 mt-3"
-            href="http://127.0.0.1:8890/auth/google"
+            href="http://127.0.0.1:8890/auth/google?redirect=/auth-callback"
           >
             <svg class="fill-current w-4 h-4 mr-2" viewBox="0 0 24 24"><path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.09501 0-7.43901-3.389-7.43901-7.574 0-4.185 3.345-7.574 7.43901-7.574 2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0 5.60499 0 .23999 5.365.23999 12S5.60499 24 12.24 24c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/></svg>
             <span>Sign-in Google</span>
@@ -20,7 +20,7 @@
 
           <a
             class="flex flex-wrap justify-between items-center w-auto focus:outline-none focus:shadow-outline bg-primary-500 hover:bg-primary-400 text-white text-sm py-2 px-3 rounded mx-2 mt-3"
-            href="http://127.0.0.1:8890/auth/github"
+            href="http://127.0.0.1:8890/auth/github?redirect=/auth-callback"
           >
             <svg class="fill-current w-4 h-4 mr-2" viewBox="0 0 24 24"><path d="M12 .297119C5.37.297119 0 5.67012 0 12.2971c0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.37998 1.235-3.21998-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.90998 1.23 3.21998 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57 4.801-1.574 8.236-6.074 8.236-11.369C24 5.67012 18.627.297119 12 .297119z"/></svg>
             <span>Sign-in Github</span>
@@ -131,9 +131,23 @@ export default {
             accessToken: data.data.accessToken,
             refresh_token: data.data.refresh_token
           };
-
           this.$store.commit('set_tokens', payload);
-          this.$router.push('account');
+          //Get User
+          axios({
+            method: 'post', //you can set what request you want to be
+            url: '/user',
+            data: {},
+            headers: {
+                Authorization: 'Bearer ' + data.data.accessToken,
+            }
+          })
+          .then(user_data=>{
+            this.$store.commit('set_user', user_data.data);
+            this.$router.push('account');
+          })
+          .catch(err=>{
+              console.log(err);
+          });
         })
         .catch(err=>{
           this.$notify({

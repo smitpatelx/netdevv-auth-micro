@@ -1,1 +1,7 @@
 @import './tailwind.css';
+
+.nl-border {
+    min-width: 100px;
+    border: 2px solid transparent;
+    border-image: url('/images/vector/dash-border-primary.svg') 2 round;
+}

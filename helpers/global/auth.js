@@ -23,7 +23,9 @@ module.exports.SanitizeUser = (user)=>{
         first_name: user.first_name,
         last_name: user.last_name,
         access: user.access,
-        primary_email: user.primary_email
+        primary_email: user.primary_email,
+        github_id: user.github_id,
+        google_id: user.google_id
     }
     return new_data;
 }

@@ -18,6 +18,11 @@ serialize = function (obj) {
   return str.join("&");
 }
 
+router.get('/testdata',  (req, res, next)=>{
+  var dd = (env.GOOGLE_SCOPE).split(",")
+  dd = JSON.stringify(dd)
+  res.redirect('/linked-accounts?data='+dd)
+})
 /********************
  * Logout
  * Params: {refreshToken} + Authorization
@@ -47,27 +52,47 @@ router.post('/login', passport.authenticate('local'), local_auth.login);
 router.post('/register', local_auth.register);
 
 //Auth with google
-router.get('/google', passport.authenticate('google', {
-  scope: (env.GOOGLE_SCOPE).split(","),
-  accessType: 'offline',
-  prompt: 'consent'
-}));
+router.get('/google', (req, res, next)=>{
+  const {redirect} = req.query
+  const state = redirect ? Buffer.from(JSON.stringify({ redirect })).toString('base64') : res.status(401)
+  const authenticator = passport.authenticate('google', {
+    scope: (env.GOOGLE_SCOPE).split(","),
+    accessType: 'offline',
+    prompt: 'consent',
+    state
+  });
+  authenticator(req, res, next)
+});
 router.get('/google/callback', passport.authenticate('google'), (req, res) => {
   var user = req.user;
   let new_user = SanitizeUser(user);
   const accessToken = jwt.sign({new_user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });
-  generate_token(new_user, accessToken, res);
+  const {state} = req.query
+  const { redirect } = JSON.parse(Buffer.from(state, 'base64').toString())
+  if (typeof redirect === 'string' && redirect.toString().startsWith('/')) {
+    generate_token_get(new_user, accessToken, res, redirect);
+  }
 });
 
 //Auth with github
-router.get('/github', passport.authenticate('github', {
-  scope: (env.GITHUB_SCOPE).split(",")
-}));
+router.get('/github', (req, res, next)=>{
+  const {redirect} = req.query
+  const state = redirect ? Buffer.from(JSON.stringify({ redirect })).toString('base64') : res.status(401)
+  const authenticator = passport.authenticate('github', {
+    scope: (env.GITHUB_SCOPE).split(","),
+    state
+  });
+  authenticator(req, res, next)
+});
 router.get('/github/callback', passport.authenticate('github'), (req, res) => {
   var user = req.user;
   let new_user = SanitizeUser(user);
   const accessToken = jwt.sign({new_user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });
-  generate_token(new_user, accessToken, res);
+  const {state} = req.query
+  const { redirect } = JSON.parse(Buffer.from(state, 'base64').toString())
+  if (typeof redirect === 'string' && redirect.toString().startsWith('/')) {
+    generate_token_get(new_user, accessToken, res, redirect);
+  }
 });
 
 var generate_token = (user, accessToken, res)=>{
@@ -84,7 +109,7 @@ var generate_token = (user, accessToken, res)=>{
       } else {
           const refreshToken = jwt.sign({user}, env.JWT_REFRESH_SECRET);
           var new_token = new AuthToken({
-              user_id: user.id,
+              user_id: user._id,
               refresh_token: refreshToken
           });
 
@@ -103,6 +128,54 @@ var generate_token = (user, accessToken, res)=>{
               }
           });
 
+      }
+  });
+}
+
+var generate_token_get = (user, accessToken, res, redirect_uri)=>{
+  AuthToken.findOne({
+      user_id: user._id
+  },
+  (err, data)=>{
+      if(data){
+        //Token Exist
+        if(redirect_uri==='/auth-callback'){
+          let string = {
+            accessToken, 
+            refresh_token: data.refresh_token
+          }
+          string = JSON.stringify(string);
+          res.redirect(redirect_uri+'?data='+string)
+        } else {
+          res.redirect(redirect_uri)
+        }
+      } else {
+        const refreshToken = jwt.sign({user}, env.JWT_REFRESH_SECRET);
+        var new_token = new AuthToken({
+            user_id: user._id,
+            refresh_token: refreshToken
+        });
+
+        new_token.save((err, new_t)=>{
+            if(err){
+                res.status(401).json({
+                    error_message:'Error Saving Token To DB',
+                    err
+                });
+            } else {
+                //New Token Created
+                if(redirect_uri==='/auth-callback'){
+                  let string = {
+                      accessToken, 
+                      refresh_token: new_t.refresh_token
+                  }
+                  string = JSON.stringify(string);
+                  res.redirect(redirect_uri+'?data='+string)
+                } else {
+                  res.redirect(redirect_uri)
+                }
+            }
+        });
       }
   });
 }

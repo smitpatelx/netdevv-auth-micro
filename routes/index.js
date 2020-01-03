@@ -12,7 +12,6 @@ router.get('/*', (req, res, next)=>{
 });
 
 router.post('/user', AuthCheck, (req, res, next)=>{
-  console.log(req.user);
   const authHeader = req.headers['authorization'];
   if(typeof authHeader !== 'undefined'){
     const token = authHeader.split(" ")[1];

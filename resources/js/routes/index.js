@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Header from '../layouts/Header';
 import SideBar from '../layouts/SideBar';
+import store from '../store/index';
 
 Vue.use(VueRouter)
 
@@ -64,12 +65,32 @@ const router = new VueRouter({
         }
       },
       { 
+        path: '/linked-accounts', 
+        components: {
+          header: Header,
+          sidebar: SideBar,
+          default: imports.LinkedAccounts
+        }, 
+        meta: { 
+          requiresAuth: true,
+          title: 'Linked Accounts - Netdevv Account'
+        }
+      },
+      { 
         path: '/logout', 
         component: imports.Logout, 
         meta: { 
           requiresAuth: true,
           title: 'Sign Out - Netdevv Account'
-        } 
+        }
+      },
+      { 
+        path: '/auth-callback', 
+        component: imports.AuthCallback, 
+        meta: { 
+          requiresGuest: true,
+          title: 'Please Wait - Netdevv Account'
+        }
       },
     ]
 });
@@ -81,6 +102,26 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     next() // make sure to always call next()!
+  }
+
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.getters.isAuth) {
+      next({
+        path: '/login'
+      });
+    } else {
+      next();
+    }
+  } else if (to.matched.some(record => record.meta.requiresGuest)) {
+    if (store.getters.isAuth) {
+      next({
+        path: '/account'
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
   }
 })
 

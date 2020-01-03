@@ -37,9 +37,9 @@ app.set('view engine', '.hbs');
 app.use(logger('dev'));
 app.use(cookieParser());
 // for parsing application/json
-app.use(bodyParser.json());
+app.use(express.json());
 // for parsing application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({
+app.use(express.urlencoded({
   extended: false
 }));
 app.use(sassMiddleware({

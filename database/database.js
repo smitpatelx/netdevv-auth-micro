@@ -6,6 +6,7 @@ mongoose.connect(`mongodb://${env.MONGO_USER}:${env.MONGO_PASS}@${env.MONGO_HOST
     useUnifiedTopology: true,
     connectTimeoutMS: 5000,
     useCreateIndex: true,
+    useFindAndModify: false
   });
 
 var db = mongoose.connection;

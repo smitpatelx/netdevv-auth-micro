@@ -8,25 +8,28 @@
                 <button @click="open=!open" v-click-outside="hide" class="block rounded-full p-3 shadow-md bg-gray-100 focus:outline-none text-gray-600 focus:text-primary-400">
                     <svg class="block h-4 w-4 fill-current" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M12 4c0 2.21002-1.79 4-4 4-2.20996 0-4-1.78998-4-4s1.79004-4 4-4c2.21 0 4 1.78998 4 4zm-2 0c0-1.09998-.90002-2-2-2s-2 .90002-2 2 .90002 2 2 2 2-.90002 2-2zM8 9c-2.67004 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4zm-6 4.01V14h12v-1c-.2-.71-3.3-2-6-2-2.69995 0-5.80005 1.29-6 2.01z"/></svg>
                 </button>
-                <div v-if="open" class="absolute rounded-lg shadow-lg z-10 bg-gray-100 right-0 mt-3 w-48 py-3">
-                    <div class="flex flex-wrap w-full flex-col text-sm font-medium antialiased">
-                        <router-link to="logout" class="focus:outline-none focus:underline transition-all ease-out transition-medium text-gray-700 hover:text-primary-400 antialiased bg-transparent hover:bg-white shadow-none hover:shadow py-1 pl-6 flex flex-wrap justify-start items-center">
-                            Sign out
-                        </router-link>
-                        <router-link to="account" class="focus:outline-none focus:underline transition-all ease-out transition-medium text-gray-700 hover:text-primary-400 antialiased bg-transparent hover:bg-white shadow-none hover:shadow py-1 pl-6 flex flex-wrap justify-start items-center">
-                            Account
-                        </router-link>
-                        <router-link @blur.native="hide" to="security" class="focus:outline-none focus:underline transition-all ease-out transition-medium text-gray-700 hover:text-primary-400 antialiased bg-transparent hover:bg-white shadow-none hover:shadow py-1 pl-6 flex flex-wrap justify-start items-center">
-                            Security
-                        </router-link>
+                <slide-y-up-transition >
+                    <div v-if="open" class="absolute rounded-lg shadow-lg z-10 bg-gray-100 right-0 mt-3 w-48 py-3">
+                        <div class="flex flex-wrap w-full flex-col text-sm font-medium antialiased">
+                            <router-link to="logout" class="focus:outline-none focus:underline transition-all ease-out transition-medium text-gray-700 hover:text-primary-400 antialiased bg-transparent hover:bg-white shadow-none hover:shadow py-1 pl-6 flex flex-wrap justify-start items-center">
+                                Sign out
+                            </router-link>
+                            <router-link to="account" class="focus:outline-none focus:underline transition-all ease-out transition-medium text-gray-700 hover:text-primary-400 antialiased bg-transparent hover:bg-white shadow-none hover:shadow py-1 pl-6 flex flex-wrap justify-start items-center">
+                                Account
+                            </router-link>
+                            <router-link @blur.native="hide" to="security" class="focus:outline-none focus:underline transition-all ease-out transition-medium text-gray-700 hover:text-primary-400 antialiased bg-transparent hover:bg-white shadow-none hover:shadow py-1 pl-6 flex flex-wrap justify-start items-center">
+                                Security
+                            </router-link>
+                        </div>
                     </div>
-                </div>
+                </slide-y-up-transition>
             </div>
         </div>
     </div>
 </template>
 <script>
 import ClickOutside from 'vue-click-outside';
+import { SlideYUpTransition } from 'vue2-transitions'
 export default {
     data(){
         return{
@@ -40,6 +43,9 @@ export default {
     },
     directives: {
         ClickOutside
+    },
+    components:{
+        SlideYUpTransition
     }
 }
 </script>

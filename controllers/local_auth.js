@@ -9,7 +9,9 @@ let local_auth = {};
 
 local_auth.login = (req, res, next)=>{
     var user = req.user;
+    console.log("Request user: ", user);
     let new_user = SanitizeUser(user);
+    console.log("New user: ", new_user);
     const accessToken = jwt.sign({new_user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });
     generate_token(new_user, accessToken, res);
 }
@@ -60,6 +62,10 @@ local_auth.register = (req, res, next)=>{
                             } else {
                                 let new_user = SanitizeUser(data);
                                 const accessToken = jwt.sign({new_user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });
+                                req.login(data, function(err) {
+                                    if (err) { return next(err); }
+                                    return next();
+                                });
                                 generate_token(new_user, accessToken, res);
                             }
                         });
@@ -86,6 +92,7 @@ local_auth.logout = (req, res, next)=>{
                         req.logout();
                         res.status(200).json("Refresh Token Deleted Successfully");
                     } else{
+                        req.logout();
                         res.status(403).json("Already Logged Out");
                     }
                 });

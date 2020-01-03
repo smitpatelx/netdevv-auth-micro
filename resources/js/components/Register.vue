@@ -215,6 +215,22 @@ export default {
           };
           
           this.$store.commit('set_tokens', payload);
+          //Get User
+          axios({
+            method: 'post', //you can set what request you want to be
+            url: '/user',
+            data: {},
+            headers: {
+                Authorization: 'Bearer ' + data.data.accessToken,
+            }
+          })
+          .then(user_data=>{
+              this.$store.commit('set_user', user_data.data);
+              this.$router.push('account');
+          })
+          .catch(err=>{
+              console.log(err);
+          });
         })
         .catch(err=>{
             if(err.response.data.error_message.length <= 2){
