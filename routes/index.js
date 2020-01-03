@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var {AuthCheck} = require("../helpers/global/auth");
+var {AuthCheck, SanitizeUser} = require("../helpers/global/auth");
 const jwt = require('jsonwebtoken');
 
 router.get('/*', (req, res, next)=>{
@@ -20,7 +20,8 @@ router.post('/user', AuthCheck, (req, res, next)=>{
       if(err){
           return res.status(403).json(err);
       } else {
-        res.status(200).json(data.new_user);
+        var user = SanitizeUser(req.user);
+        res.status(200).json(user);
       }
     });
   } else {

@@ -17,7 +17,7 @@ const authRoutes = require('./routes/auth');
 const app = express();
 
 //Cors Implementation
-const whitelist = ['http://127.0.0.1:8890', 'https://snapi.netdevv.com']
+const whitelist = (env.CORS_DOMAINS).toString().split(',');
 const co = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {

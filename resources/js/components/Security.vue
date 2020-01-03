@@ -2,7 +2,7 @@
     <div class="w-5/6 flex flex-wrap p-3">
         <form ref="change_p_form" @submit.prevent class="w-full bg-white rounded-lg mt-4 py-6 px-10 shadow-lg flex flex-wrap antialiased">
             <div class="w-full flex flex-wrap">
-                <a href="#change-password" class="nl-border text-gray-500 py-2 px-4 font-medium leading-tight text-sm">
+                <a href="#change-password" class="nl-border text-primary-500 py-2 px-4 font-medium leading-tight text-sm">
                     # Change Password
                 </a>
             </div>

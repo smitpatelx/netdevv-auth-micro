@@ -1990,6 +1990,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2028,20 +2030,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      loginWindow: ''
+      loginWindow: '',
+      user: {}
     };
   },
-  computed: {
-    user: function user() {
-      return this.$store.getters.get_user;
+  methods: {
+    update_user: function update_user() {
+      this.user = this.$store.getters.get_user;
     }
   },
-  methods: {},
-  created: function created() {},
-  watch: {}
+  mounted: function mounted() {
+    var _this = this;
+
+    //Get User
+    axios__WEBPACK_IMPORTED_MODULE_0___default()({
+      method: 'post',
+      //you can set what request you want to be
+      url: '/user',
+      data: {},
+      headers: {
+        Authorization: 'Bearer ' + this.$store.getters.getToken
+      }
+    }).then(function (user_data) {
+      _this.$store.commit('set_user', user_data.data);
+
+      _this.update_user();
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  }
 });
 
 /***/ }),
@@ -9650,7 +9671,7 @@ var staticRenderFns = [
         "a",
         {
           staticClass:
-            "nl-border text-gray-500 py-2 px-4 font-medium leading-tight text-sm",
+            "nl-border text-primary-500 py-2 px-4 font-medium leading-tight text-sm",
           attrs: { href: "#personal-info" }
         },
         [_vm._v("\n            # Personal Information\n        ")]
@@ -9941,7 +9962,7 @@ var staticRenderFns = [
         "a",
         {
           staticClass:
-            "nl-border text-gray-500 py-2 px-4 font-medium leading-tight text-sm",
+            "nl-border text-primary-500 py-2 px-4 font-medium leading-tight text-sm",
           attrs: { href: "#linked-accounts" }
         },
         [_vm._v("\n            # Linked Accounts\n        ")]
@@ -11288,7 +11309,7 @@ var staticRenderFns = [
         "a",
         {
           staticClass:
-            "nl-border text-gray-500 py-2 px-4 font-medium leading-tight text-sm",
+            "nl-border text-primary-500 py-2 px-4 font-medium leading-tight text-sm",
           attrs: { href: "#change-password" }
         },
         [_vm._v("\n                # Change Password\n            ")]

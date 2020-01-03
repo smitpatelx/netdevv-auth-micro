@@ -1,7 +1,7 @@
 <template>
     <div class="w-5/6 bg-white rounded-lg mt-4 py-6 px-10 shadow-lg flex flex-wrap antialiased">
         <div class="w-full flex flex-wrap">
-            <a href="#personal-info" class="nl-border text-gray-500 py-2 px-4 font-medium leading-tight text-sm">
+            <a href="#personal-info" class="nl-border text-primary-500 py-2 px-4 font-medium leading-tight text-sm">
                 # Personal Information
             </a>
         </div>

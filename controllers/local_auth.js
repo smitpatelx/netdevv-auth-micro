@@ -9,11 +9,15 @@ let local_auth = {};
 
 local_auth.login = (req, res, next)=>{
     var user = req.user;
-    console.log("Request user: ", user);
     let new_user = SanitizeUser(user);
-    console.log("New user: ", new_user);
     const accessToken = jwt.sign({new_user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });
-    generate_token(new_user, accessToken, res);
+    generate_token(new_user, accessToken, res)
+    .then(result=>{
+        res.status(200).json({result});
+    })
+    .catch(err=>{
+        res.status(401).json({err});
+    });
 }
 
 local_auth.register = (req, res, next)=>{
@@ -53,20 +57,31 @@ local_auth.register = (req, res, next)=>{
                             password: hash
                         });
 
-                        new_user.save((err, data)=>{
+                        new_user.save((err, data2)=>{
                             if(err){
                                 res.status(401).json({
                                     error_message:'Error Creating User',
                                     err
                                 });
                             } else {
-                                let new_user = SanitizeUser(data);
-                                const accessToken = jwt.sign({new_user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });
-                                req.login(data, function(err) {
-                                    if (err) { return next(err); }
-                                    return next();
+                                let new_user = SanitizeUser(data2);
+                                const accessToken = jwt.sign({new_user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });                            
+                                generate_token(new_user, accessToken, res)
+                                .then(result=>{
+                                    req.login(data2, (err)=>{
+                                        if ( ! err ){
+                                            res.status(200).json(result)
+                                        } else {
+                                            //handle error
+                                            res.status(401).json({
+                                                error_message: 'Error Loggin In User'
+                                            })
+                                        }
+                                    })
+                                })
+                                .catch(err=>{
+                                    res.status(401).json({err});
                                 });
-                                generate_token(new_user, accessToken, res);
                             }
                         });
                     }
@@ -103,40 +118,42 @@ local_auth.logout = (req, res, next)=>{
     }
 }
 
-var generate_token = (user, accessToken, res)=>{
-    AuthToken.findOne({
-        user_id: user._id
-    },
-    (err, data)=>{
-        if(data){
-            //Token Exist
-            res.status(200).json({
-                accessToken, 
-                refresh_token: data.refresh_token
-            });
-        } else {
-            const refreshToken = jwt.sign({user}, env.JWT_REFRESH_SECRET);
-            var new_token = new AuthToken({
-                user_id: user._id,
-                refresh_token: refreshToken
-            });
+var generate_token = async (user, accessToken)=>{
+    return new Promise((resolve, reject) => {   
+        AuthToken.findOne({
+            user_id: user._id
+        },
+        (err, data)=>{
+            if(data){
+                //Token Exist
+                resolve({
+                    accessToken, 
+                    refresh_token: data.refresh_token
+                });
+            } else {
+                const refreshToken = jwt.sign({user}, env.JWT_REFRESH_SECRET);
+                var new_token = new AuthToken({
+                    user_id: user._id,
+                    refresh_token: refreshToken
+                });
 
-            new_token.save((err, new_t)=>{
-                if(err){
-                    res.status(401).json({
-                        error_message:'Error Saving Token To DB',
-                        err
-                    });
-                } else {
-                    //New Token Created
-                    res.status(200).json({
-                        accessToken, 
-                        refresh_token: new_t.refresh_token
-                    });
-                }
-            });
+                new_token.save((err, new_t)=>{
+                    if(new_t){
+                        //New Token Created
+                        resolve({
+                            accessToken, 
+                            refresh_token: new_t.refresh_token
+                        });
+                    } else {
+                        reject({
+                            error_message:'Error Saving Token To DB',
+                            err
+                        });
+                    }
+                });
 
-        }
+            }
+        });
     });
 }
 

@@ -9,7 +9,6 @@ const User = require('../models/user.js');
 const bcrypt = require('bcrypt');
 
 passport.serializeUser((user, done) => {
-    console.log(user);
     done(null, user._id);
 });
 

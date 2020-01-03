@@ -1167,8 +1167,8 @@ img {
   }
 }.nl-border {
   min-width: 100px;
-  border: 2px solid transparent;
-  -webkit-border-image: url("/images/vector/dash-border-primary.svg") 2 round;
-       -o-border-image: url("/images/vector/dash-border-primary.svg") 2 round;
-          border-image: url("/images/vector/dash-border-primary.svg") 2 round;
+  border: 2px solid #2161c4;
+  -webkit-border-image: url("/images/vector/border-dash-blue.svg") 2 round;
+       -o-border-image: url("/images/vector/border-dash-blue.svg") 2 round;
+          border-image: url("/images/vector/border-dash-blue.svg") 2 round;
 }

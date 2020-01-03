@@ -88,7 +88,7 @@ router.get('/github/callback', passport.authenticate('github'), (req, res) => {
   var user = req.user;
   let new_user = SanitizeUser(user);
   const accessToken = jwt.sign({new_user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });
-  const {state} = req.query
+  const { state } = req.query
   const { redirect } = JSON.parse(Buffer.from(state, 'base64').toString())
   if (typeof redirect === 'string' && redirect.toString().startsWith('/')) {
     generate_token_get(new_user, accessToken, res, redirect);
