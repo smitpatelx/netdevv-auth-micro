@@ -13,7 +13,7 @@ local_auth.login = (req, res, next)=>{
     const accessToken = jwt.sign({new_user}, env.JWT_SECRET, { expiresIn: env.TOKEN_EXPIRE_TIME });
     generate_token(new_user, accessToken, res)
     .then(result=>{
-        res.status(200).json({result});
+        res.status(200).json({result}); 
     })
     .catch(err=>{
         res.status(401).json({err});

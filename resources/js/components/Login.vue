@@ -127,9 +127,10 @@ export default {
           password: this.password
         })
         .then(data=>{
+          console.log(data)
           let payload = {
-            accessToken: data.data.accessToken,
-            refresh_token: data.data.refresh_token
+            accessToken: data.data.result.accessToken,
+            refresh_token: data.data.result.refresh_token
           };
           this.$store.commit('set_tokens', payload);
           //Get User
@@ -138,7 +139,7 @@ export default {
             url: '/user',
             data: {},
             headers: {
-                Authorization: 'Bearer ' + data.data.accessToken,
+                Authorization: 'Bearer ' + data.data.result.accessToken,
             }
           })
           .then(user_data=>{

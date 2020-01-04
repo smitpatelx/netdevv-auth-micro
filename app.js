@@ -62,7 +62,7 @@ const csrfMiddleware = csrf({
   sameSite: 'strict',
   httpOnly: false
 });
-app.use(csrfMiddleware);
+// app.use(csrfMiddleware);
 
 //Database
 require('./database/database');

@@ -4,10 +4,10 @@ var {AuthCheck, SanitizeUser} = require("../helpers/global/auth");
 const jwt = require('jsonwebtoken');
 
 router.get('/*', (req, res, next)=>{
-  let csrf_token = req.csrfToken();
+  // let csrf_token = req.csrfToken();
   res.render('index', 
   { 
-    csrf: csrf_token
+    // csrf: csrf_token
   });
 });
 
@@ -18,7 +18,7 @@ router.post('/user', AuthCheck, (req, res, next)=>{
     if(token == null) return res.status(401).json("Access Denied - Token not present");
     jwt.verify(token, env.JWT_SECRET, (err, data)=>{
       if(err){
-          return res.status(403).json(err);
+        return res.status(403).json(err);
       } else {
         var user = SanitizeUser(req.user);
         res.status(200).json(user);
