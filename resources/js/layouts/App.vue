@@ -2,19 +2,20 @@
     <div id="app" class="bg-gray-200">
         <notifications group="main" classes="vue-notification2"/>
         <router-view name="header"></router-view>
-        <div class="w-full flex flex-wrap px-4 xl:px-16">
-            <router-view name="sidebar"></router-view>
-            <fade-transition origin="center" mode="out-in" :duration="300">
-                <router-view></router-view>
-            </fade-transition>
+        <div class="w-full flex flex-wrap px-4 xl:px-16 py-4">
+            <router-view name="sidebar" class="w-48 flex flex-wrap"></router-view>
+            <div class="w-auto flex-1 flex-wrap">
+                <slide-x-left-transition origin="center" mode="out-in" :duration="300">
+                    <router-view></router-view>
+                </slide-x-left-transition>
+            </div>
         </div>
     </div>
 </template>
 <script>
-import { FadeTransition, SlideXLeftTransition } from "vue2-transitions";
+import { SlideXLeftTransition } from "vue2-transitions";
 export default {
     components:{
-        FadeTransition,
         SlideXLeftTransition
     },
 }

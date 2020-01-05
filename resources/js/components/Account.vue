@@ -1,13 +1,14 @@
 <template>
-    <div class="w-5/6 bg-white rounded-lg mt-4 py-6 px-10 shadow-lg flex flex-wrap antialiased">
-        <div class="w-full flex flex-wrap">
-            <a href="#personal-info" class="nl-border text-primary-500 py-2 px-4 font-medium leading-tight text-sm">
-                # Personal Information
+    <div class="w-auto bg-white rounded-lg py-6 px-6 shadow-lg flex flex-wrap antialiased">
+        <div class="w-full flex flex-wrap border-b-2 border-gray-300 mb-4">
+            <a href="#personal-info" class="text-white hover:text-gray-500 py-2 font-semibold leading-tight text-lg inline-flex justify-center items-center">
+                <span class="text-gray-700">Personal Information</span>
+                <svg class="w-4 h-4 inline-block fill-current ml-2 mt-1" style="transform: rotate(-45deg);" viewBox="0 0 20 10"><path d="M1.89999 5c0-1.71001 1.39-3.10001 3.10001-3.10001h4V0H5C2.24001 0 0 2.24001 0 5s2.24001 5 5 5h4V8.10001H5c-1.71001 0-3.10001-1.39-3.10001-3.10001zM6 6h8V4H6v2zm5-6h4c2.76 0 5 2.24001 5 5s-2.24 5-5 5h-4V8.10001h4c1.71 0 3.1-1.39 3.1-3.10001 0-1.71001-1.39-3.10001-3.1-3.10001h-4V0z"/></svg>
             </a>
         </div>
         <form @submit.prevent class="w-full flex flex-wrap" ref="form1">
-            <div class="w-1/5 flex flex-wrap py-3 px-2">
-                <label for="first_name" class="w-full text-gray-600 text-xs font-medium mb-1">First Name</label>
+            <div class="w-1/5 flex flex-wrap py-3 pr-2">
+                <label for="first_name" class="w-full text-gray-600 text-xs font-normal mb-1">First Name</label>
                 <input
                 type="text"
                 v-model.trim="$v.first_name.$model"
@@ -20,8 +21,8 @@
                 id="first_name"
                 />
             </div>
-            <div class="w-1/5 flex flex-wrap py-3 px-2">
-                <label for="last_name" class="w-full text-gray-600 text-xs font-medium mb-1">Last Name</label>
+            <div class="w-1/5 flex flex-wrap py-3 pr-2">
+                <label for="last_name" class="w-full text-gray-600 text-xs font-normal mb-1">Last Name</label>
                 <input
                 type="text"
                 v-model.trim="$v.last_name.$model"

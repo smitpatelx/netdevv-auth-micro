@@ -1,11 +1,12 @@
 <template>
-    <div class="w-5/6 bg-white rounded-lg mt-4 py-6 px-10 shadow-lg flex flex-wrap antialiased">
-        <div class="w-full flex flex-wrap">
-            <a href="#linked-accounts" class="nl-border text-primary-500 py-2 px-4 font-medium leading-tight text-sm">
-                # Linked Accounts
+    <div class="w-full bg-white rounded-lg py-6 px-6 shadow-lg flex flex-wrap antialiased">
+        <div class="w-full flex flex-wrap border-b-2 border-gray-300 mb-4">
+            <a href="#linked-accounts" class="text-white hover:text-gray-500 py-2 font-semibold leading-tight text-lg inline-flex justify-center items-center">
+                <span class="text-gray-700">Linked Accounts</span>
+                <svg class="w-4 h-4 inline-block fill-current ml-2" style="transform: rotate(-45deg);" viewBox="0 0 20 10"><path d="M1.89999 5c0-1.71001 1.39-3.10001 3.10001-3.10001h4V0H5C2.24001 0 0 2.24001 0 5s2.24001 5 5 5h4V8.10001H5c-1.71001 0-3.10001-1.39-3.10001-3.10001zM6 6h8V4H6v2zm5-6h4c2.76 0 5 2.24001 5 5s-2.24 5-5 5h-4V8.10001h4c1.71 0 3.1-1.39 3.1-3.10001 0-1.71001-1.39-3.10001-3.1-3.10001h-4V0z"/></svg>
             </a>
         </div>
-        <dir class="w-full flex flex-wrap p-0">
+        <div class="w-full flex flex-wrap p-0">
             <div class="w-auto flex flex-wrap flex-row p-2">
                 <div class="w-auto flex flex-wrap justify-center items-center">
                     <svg v-if="typeof user.google_id==='undefined'" class="fill-current w-6 h-6 text-red-500" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.98999 0C4.46997 0 0 4.48001 0 10c0 5.52 4.46997 10 9.98999 10C15.52 20 20 15.52 20 10 20 4.48001 15.52 0 9.98999 0zM11 11V5H9v6h2zm0 4v-2H9v2h2zm-9-5c0 4.42 3.58002 8 8 8 4.42 0 8-3.58 8-8 0-4.42001-3.58-8-8-8-4.41998 0-8 3.57999-8 8z" clip-rule="evenodd"/></svg>
@@ -33,7 +34,7 @@
                     <span v-html="typeof user.github_id==='undefined' ? 'Sign-in Github' : 'Github'"></span>
                 </a>
             </div>
-        </dir>
+        </div>
     </div>
 </template>
 <script>
