@@ -6,7 +6,7 @@ const LocalStrategy = require('passport-local');
 const {SanitizeUser} = require('../helpers/global/auth');
 
 const User = require('../models/user.js');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 passport.serializeUser((user, done) => {
     done(null, user._id);

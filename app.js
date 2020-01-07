@@ -8,6 +8,7 @@ const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
+// const session = require('express-session');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const csrf = require('csurf');

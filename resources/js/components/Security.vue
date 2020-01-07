@@ -52,16 +52,19 @@
                 </div>
             </div>
 
-            <div class="w-full flex flex-wrap flex-row justify-start py-4 px-1 mt-3">
-                <button
-                  class="focus:outline-none focus:shadow-outline hover:bg-primary-400 rounded text-white py-2 px-4 font-semibold text-sm cursor-pointer"
-                  :class="$v.$invalid ? 'bg-primary-400':'bg-primary-500'"
-                  @click="form_submit"
-                >Change Password</button>
+            <div class="w-full flex flex-wrap flex-row justify-center py-4 px-1 mt-3">
                 <button
                   @click="reset_change_p_form(); "
-                  class="ml-4 focus:outline-none focus:shadow-outline bg-gray-200 hover:bg-gray-300 rounded text-primary-400 py-2 px-4 font-semibold text-sm"
-                >Reset</button>
+                  class="focus:outline-none focus:shadow-outline bg-gray-300 hover:bg-gray-400 rounded-lg text-gray-700 py-2 px-4 font-semibold text-sm flex flex-wrap justify-center items-center"
+                >Reset
+                    <svg class="w-4 h-4 inline-block ml-2 fill-current text-gray-600" viewBox="0 0 18 16"><path d="M7 4.5v-4l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>
+                </button>
+                <button
+                  class="ml-4 focus:outline-none focus:shadow-outline bg-primary-500 hover:bg-primary-400 rounded-lg text-white py-2 px-4 font-semibold text-sm cursor-pointer flex flex-wrap justify-center items-center"
+                  @click="form_submit"
+                >Change Password
+                <svg class="w-4 h-4 inline-block ml-2 fill-current text-white" viewBox="0 0 16 22"><path d="M8 0v3c4.42 0 8 3.58 8 8 0 1.57-.46 3.03-1.24 4.26L13.3 13.8c.45-.83.7-1.79.7-2.8 0-3.31-2.69-6-6-6v3L4 4l4-4zM2 11c0 3.31 2.69 6 6 6v-3l4 4-4 4v-3c-4.41998 0-8-3.58-8-8 0-1.57.460022-3.03 1.23999-4.26L2.70001 8.2C2.25 9.03 2 9.99 2 11z"/></svg>
+                </button>
             </div>
         </form>
     </div>

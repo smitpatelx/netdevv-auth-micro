@@ -12,7 +12,7 @@
                 </router-link>
                 <router-link to="linked-accounts" class="focus:outline-none focus:underline text-gray-700 rounded-lg antialiased bg-transparent hover:underline shadow-none py-2 px-3 lg:px-5 flex flex-wrap justify-start items-center">
                     <svg class="inline-block h-4 w-4 fill-current mr-2" viewBox="0 0 22 22"><path fill-rule="evenodd" d="M0 11.295C0 5.22501 4.93005.295013 11 .295013c6.0699 0 11 4.929997 11 10.999987h-2c0-4.96999-4.03-8.99999-9-8.99999-4.96997 0-9 4.03-9 8.99999H0zm11-6.99999c-3.87 0-7 3.13001-7 6.99999h2c0-2.76 2.23999-4.99999 5-4.99999 2.76 0 5 2.23999 5 4.99999h2c0-3.86998-3.13-6.99999-7-6.99999zm1 9.28999c.88-.39 1.5-1.26 1.5-2.29 0-1.37999-1.12-2.49999-2.5-2.49999s-2.5 1.12-2.5 2.49999c0 1.02.62 1.9 1.5 2.29v3.3l-3.41003 3.41L8 21.705l3-3 3 3 1.4099-1.41L12 16.885v-3.3z" clip-rule="evenodd"/></svg>
-                    Linked Accounts
+                    Social Media
                 </router-link>
                 <router-link to="logout" class="focus:outline-none focus:underline text-gray-700 rounded-lg antialiased bg-transparent hover:underline shadow-none py-2 px-3 lg:px-5 flex flex-wrap justify-start items-center">
                     <svg class="inline-block h-4 w-4 fill-current mr-2" viewBox="0 0 20 20"><path d="M2 0h14c1.1 0 2 .899994 2 2v14c0 1.1-.9 2-2 2H2c-1.109985 0-2-.9-2-2v-4h2v4h14V2H2v4H0V2C0 .899994.890015 0 2 0zm6.5 14l-1.41003-1.41L9.67004 10H0V8h9.67004L7.08997 5.41 8.5 4l5 5-5 5z"/></svg>
