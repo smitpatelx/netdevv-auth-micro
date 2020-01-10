@@ -46,9 +46,10 @@ export default {
                     type: 'error',
                     'animation-name':'slide-left'
                 });
-                setTimeout(()=>{
-                    this.$router.push('login');
-                },4000);
+                location.reload(true);
+                // setTimeout(()=>{
+                //     this.$router.push('login');
+                // },4000);
             });
         }
     },
