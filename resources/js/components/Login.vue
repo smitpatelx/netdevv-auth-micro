@@ -8,10 +8,10 @@
           <a href="https://netdevv.com/" target="_blank" class="focus:outline-none w-full flex flex-wrap justify-center mb-4">
             <img src="/images/netdevv-logo.svg" class="select-none h-12 w-auto flex" alt="Netdevv" title="Netdevv"/>
           </a>
-          <p class="w-full text-center text-gray-800 font-semibold text-xl mb-1">Sign In</p>
-          <p class="w-full text-center text-gray-800 font-normal text-base mb-3">Use your Social Media</p>
+          <p class="w-full text-center text-gray-800 font-semibold text-2xl mb-1">Sign In</p>
+          <p class="w-full text-center text-gray-800 font-normal text-lg mb-3">Use your Social Media</p>
           <a
-            class="flex flex-wrap justify-between items-center w-auto focus:outline-none focus:shadow-outline bg-primary-500 hover:bg-primary-400 text-white text-sm py-2 px-3 rounded mx-2 mt-3"
+            class="flex flex-wrap justify-between items-center w-auto focus:outline-none focus:shadow-outline bg-primary-500 hover:bg-primary-400 text-white text-lg py-2 px-3 rounded mx-2 mt-3"
             href="http://127.0.0.1:8890/auth/google?redirect=/auth-callback"
           >
             <svg class="fill-current w-4 h-4 mr-2" viewBox="0 0 24 24"><path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.09501 0-7.43901-3.389-7.43901-7.574 0-4.185 3.345-7.574 7.43901-7.574 2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0 5.60499 0 .23999 5.365.23999 12S5.60499 24 12.24 24c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/></svg>
@@ -19,7 +19,7 @@
           </a>
 
           <a
-            class="flex flex-wrap justify-between items-center w-auto focus:outline-none focus:shadow-outline bg-primary-500 hover:bg-primary-400 text-white text-sm py-2 px-3 rounded mx-2 mt-3"
+            class="flex flex-wrap justify-between items-center w-auto focus:outline-none focus:shadow-outline bg-primary-500 hover:bg-primary-400 text-white text-lg py-2 px-3 rounded mx-2 mt-3"
             href="http://127.0.0.1:8890/auth/github?redirect=/auth-callback"
           >
             <svg class="fill-current w-4 h-4 mr-2" viewBox="0 0 24 24"><path d="M12 .297119C5.37.297119 0 5.67012 0 12.2971c0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.37998 1.235-3.21998-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.90998 1.23 3.21998 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57 4.801-1.574 8.236-6.074 8.236-11.369C24 5.67012 18.627.297119 12 .297119z"/></svg>
@@ -63,19 +63,19 @@
                 <svg v-else class="fill-current w-5 h-5" viewBox="0 0 22 15"><path fill-rule="evenodd" d="M11 0C6 0 1.72998 3.10999 0 7.5 1.72998 11.89 6 15 11 15s9.27-3.11 11-7.5C20.27 3.10999 16 0 11 0zm0 12.5c-2.76001 0-5-2.24-5-5 0-2.76001 2.23999-5 5-5 2.76 0 5 2.23999 5 5 0 2.76-2.24 5-5 5zm-3-5c0-1.65997 1.33997-3 3-3 1.66 0 3 1.34003 3 3s-1.34 3-3 3c-1.66003 0-3-1.34003-3-3z" clip-rule="evenodd"/></svg> 
               </button>
             </div>
-            <router-link tag="a" to="/reset-password" class="mt-1 w-full text-left text-primary-400 hover:text-primary-200 font-semibold text-sm">Forgot Password?</router-link>
+            <router-link tag="a" to="/reset-password" class="mt-1 w-full text-left text-primary-400 hover:text-primary-200 font-semibold text-base">Forgot Password?</router-link>
           </div>
-          <p class="px-2 my-4 w-full text-left text-black font-normal text-sm">
+          <p class="px-2 my-4 w-full text-left text-black font-normal text-base">
             For any issue regarding login, please contact us at 
             <a href="mailto:support@netdevv.com" target="_blank" class="font-semibold text-primary-400 hover:text-primary-200">support@netdevv.com</a>
           </p>
           <div class="w-full flex flex-wrap flex-row justify-between py-4 px-1 mt-3">
             <router-link
               tag="a" to="/register"
-              class="focus:outline-none focus:shadow-outline bg-gray-200 hover:bg-gray-300 rounded text-primary-400 py-2 px-4 font-semibold text-sm"
+              class="focus:outline-none focus:shadow-outline bg-gray-200 hover:bg-gray-300 rounded text-primary-400 py-2 px-4 font-semibold text-base"
             >Create Account</router-link>
             <button
-              class="focus:outline-none focus:shadow-outline hover:bg-primary-400 rounded text-white py-2 px-4 font-semibold text-sm cursor-pointer"
+              class="focus:outline-none focus:shadow-outline hover:bg-primary-400 rounded text-white py-2 px-4 font-semibold text-base cursor-pointer"
               :class="$v.$invalid ? 'bg-primary-400':'bg-primary-500'"
               @click="login_form"
             >Login</button>
@@ -85,9 +85,9 @@
       </div>
       <!-- Help -->
       <div class="w-full sm:w-96 flex flex-wrap items-center justify-center px-16 sm:px-24">
-        <router-link tag="a" to="/help" class="mx-4 text-gray-600 hover:text-gray-800 font-semibold text-sm">Help</router-link>
-        <router-link tag="a" to="/privacy-policy" class="mx-4 text-gray-600 hover:text-gray-800 font-semibold text-sm">Privacy</router-link>
-        <router-link tag="a" to="/terms-of-services" class="mx-4 text-gray-600 hover:text-gray-800 font-semibold text-sm">Terms</router-link>
+        <router-link tag="a" to="/help" class="mx-4 text-gray-600 hover:text-gray-800 font-semibold text-base">Help</router-link>
+        <router-link tag="a" to="/privacy-policy" class="mx-4 text-gray-600 hover:text-gray-800 font-semibold text-base">Privacy</router-link>
+        <router-link tag="a" to="/terms-of-services" class="mx-4 text-gray-600 hover:text-gray-800 font-semibold text-base">Terms</router-link>
       </div>
     </form>
   </div>
