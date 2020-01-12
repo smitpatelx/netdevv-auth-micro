@@ -1,5 +1,3 @@
-// const createError = require('http-errors');
-// const history = require('connect-history-api-fallback');
 const express = require('express');
 const hbs = require( 'express-handlebars');
 const path = require('path');
@@ -8,7 +6,6 @@ const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
-// const session = require('express-session');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const csrf = require('csurf');

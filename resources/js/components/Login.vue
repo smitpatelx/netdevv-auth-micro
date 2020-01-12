@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="w-full min-h-screen flex items-center justify-center">
     <form class="flex flex-wrap flex-col justify-center items-center py-10 px-4 sm:px-2" method="post" @submit.prevent>
       <div
         class="border border-solid border-transparent sm:border-gray-400 flex flex-col flex-wrap bg-white w-full sm:w-96 text-center bg-white my-2 py-8 rounded-lg"
