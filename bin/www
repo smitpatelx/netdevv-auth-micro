@@ -89,3 +89,11 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+/*
+ * Fixing nodemon "Port 3030 is already in use"
+ */
+process.on('SIGINT', () => {
+  console.log('do SIGINT');
+  process.exit();
+});

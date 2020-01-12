@@ -1,7 +1,7 @@
 <template>
     <div class="w-auto bg-white rounded-lg py-6 px-6 shadow-lg flex flex-wrap antialiased">
         <div class="w-full flex flex-wrap border-b-2 border-gray-200 mb-4">
-            <a href="#personal-info" class="text-white hover:text-gray-500 py-2 font-semibold leading-tight text-lg inline-flex justify-center items-center">
+            <a href="#personal-info" class="text-white hover:text-gray-500 focus:text-green-500 focus:outline-none py-2 leading-tight text-lg inline-flex justify-center items-center block">
                 <span class="text-gray-700 font-medium">Personal Information</span>
                 <svg class="w-4 h-4 inline-block fill-current ml-2 mt-1" style="transform: rotate(-45deg);" viewBox="0 0 20 10"><path d="M1.89999 5c0-1.71001 1.39-3.10001 3.10001-3.10001h4V0H5C2.24001 0 0 2.24001 0 5s2.24001 5 5 5h4V8.10001H5c-1.71001 0-3.10001-1.39-3.10001-3.10001zM6 6h8V4H6v2zm5-6h4c2.76 0 5 2.24001 5 5s-2.24 5-5 5h-4V8.10001h4c1.71 0 3.1-1.39 3.1-3.10001 0-1.71001-1.39-3.10001-3.1-3.10001h-4V0z"/></svg>
             </a>

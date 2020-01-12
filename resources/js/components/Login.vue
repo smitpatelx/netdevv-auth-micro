@@ -63,11 +63,11 @@
                 <svg v-else class="fill-current w-5 h-5" viewBox="0 0 22 15"><path fill-rule="evenodd" d="M11 0C6 0 1.72998 3.10999 0 7.5 1.72998 11.89 6 15 11 15s9.27-3.11 11-7.5C20.27 3.10999 16 0 11 0zm0 12.5c-2.76001 0-5-2.24-5-5 0-2.76001 2.23999-5 5-5 2.76 0 5 2.23999 5 5 0 2.76-2.24 5-5 5zm-3-5c0-1.65997 1.33997-3 3-3 1.66 0 3 1.34003 3 3s-1.34 3-3 3c-1.66003 0-3-1.34003-3-3z" clip-rule="evenodd"/></svg> 
               </button>
             </div>
-            <router-link tag="a" to="/login/reset-password" class="mt-1 w-full text-left text-primary-400 hover:text-primary-200 font-semibold text-sm">Forgot Password?</router-link>
+            <router-link tag="a" to="/reset-password" class="mt-1 w-full text-left text-primary-400 hover:text-primary-200 font-semibold text-sm">Forgot Password?</router-link>
           </div>
           <p class="px-2 my-4 w-full text-left text-black font-normal text-sm">
             For any issue regarding login, please contact us at 
-            <a href="mailto:support@netdevv.com" target="_blank" class="font-semibold text-primary-400 hover:text-primary-500">support@netdevv.com</a>
+            <a href="mailto:support@netdevv.com" target="_blank" class="font-semibold text-primary-400 hover:text-primary-200">support@netdevv.com</a>
           </p>
           <div class="w-full flex flex-wrap flex-row justify-between py-4 px-1 mt-3">
             <router-link

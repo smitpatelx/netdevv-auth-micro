@@ -24,7 +24,14 @@ const router = new VueRouter({
     linkExactActiveClass: 'active',
     mode: 'history',
     routes: [
-      { path: '/', component: imports.Login },
+      { 
+        path: '/', 
+        component: imports.Login, 
+        meta: { 
+          requiresGuest: true,
+          title: 'Sign In - Netdevv Account'
+        } 
+      },
       { 
         path: '/login', 
         component: imports.Login, 
